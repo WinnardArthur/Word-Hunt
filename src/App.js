@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     dictionaryApi();
-  }, [word, category])
+  }, [word, category, dictionaryApi])
 
   return (
     <div className="App" style={{height: '100vh', backgroundColor: lightMode ? "#fff" : 'teal', color: lightMode ? "black" : 'white', transition: "all .5s linear"}}>
