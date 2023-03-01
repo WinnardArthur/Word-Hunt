@@ -2,12 +2,28 @@
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    scrollbar-width: thin;
     height: 55vh;
-    border: 10px solid rgb(105, 105, 105);
+    border: 10px solid lavender;
     border-radius: 10px;
     padding: 10px 20px;
     overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: .5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .4);
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
 }
 
 .subTitle {

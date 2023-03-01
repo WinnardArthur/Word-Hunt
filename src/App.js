@@ -27,24 +27,25 @@ function App() {
     track: {},
   })(Switch)
 
-  const dictionaryApi = async () => {
-    try {
-      const data = await axios.get(
-        `https://api.dictionaryapi.dev/api/v2/entries/${category}/${word}`
-      )
-    console.log(data)
-    setMeanings(data.data)
-
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  console.log(meanings)
-
+ 
   useEffect(() => {
+    const dictionaryApi = async () => {
+      try {
+        const {data} = await axios.get(
+          `https://api.dictionaryapi.dev/api/v2/entries/${category}/${word}`
+        )
+      console.log(data)
+      setMeanings(data)
+  
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
     dictionaryApi();
   }, [word, category])
+
+  console.log('cat', category)
 
   return (
     <div className="App" style={{height: '100vh', backgroundColor: lightMode ? "#fff" : 'teal', color: lightMode ? "black" : 'white', transition: "all .5s linear"}}>

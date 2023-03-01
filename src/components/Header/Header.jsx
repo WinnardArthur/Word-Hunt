@@ -1,10 +1,10 @@
-import { createMuiTheme, MenuItem, TextField, ThemeProvider } from '@material-ui/core';
+import { createTheme, MenuItem, TextField, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import './header.css';
 import Category from '../../data/category';
 
 const Header = ({ category, setCategory, word, setWord, lightMode}) => {
-    const darkTheme = createMuiTheme({
+    const darkTheme = createTheme({
         palette: {
             primary: {
                 main: lightMode ? "#009688" : "#fff"
@@ -17,6 +17,7 @@ const Header = ({ category, setCategory, word, setWord, lightMode}) => {
         setCategory(language)
         setWord('')
     }
+
     return (
         <div className="header">
             <span className="title">{word ? word : "Nard Word Hunt"}</span>
