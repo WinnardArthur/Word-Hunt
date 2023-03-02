@@ -1,10 +1,12 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, Switch, withStyles } from '@material-ui/core';
+import { Container } from '@mui/material';
 import Header from './components/Header/Header';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import Definitions from './components/definitions/Definitions';
-import { teal } from '@material-ui/core/colors';
+import { Box } from '@mui/system';
 
 function App() {
 
@@ -12,20 +14,19 @@ function App() {
   const [word, setWord] = useState('');
   const [category, setCategory] = useState("en");
   const [lightMode, setLightMode] = useState(false);
+  const [coloredMode, setColoredMode] = useState(true);
 
-  const DarkMode = withStyles({
-    switchBase: {
-      color: teal[300],
-      "&$checked": {
-        color: teal[500],
-      },
-      "&$checked + $track": {
-        backgroundColor: teal[500],
-      },
+
+  const pallete = {
+    lightMode: {
+      backgroundColor: 'white',
+      color: 'black'
     },
-    checked: {},
-    track: {},
-  })(Switch)
+    coloredMode: {
+      backgroundColor: 'teal',
+      color: 'white'
+    }
+  }
 
  
   useEffect(() => {
@@ -48,14 +49,25 @@ function App() {
   console.log('cat', category)
 
   return (
-    <div className="App" style={{height: '100vh', backgroundColor: lightMode ? "#fff" : 'teal', color: lightMode ? "black" : 'white', transition: "all .5s linear"}}>
+    <div className="App" style={{height: '100vh', backgroundColor: lightMode ? pallete.lightMode.backgroundColor : pallete.coloredMode.backgroundColor, color: lightMode ? pallete.lightMode.color : pallete.coloredMode.color, transition: "all .5s linear"}}>
       <Container 
         maxWidth="md" 
         style={{display: 'flex', flexDirection: 'column', height: '100vh', justifyContent: 'space-evenly'}}
       >
-        <div style={{position: "absolute", top: 0, right: 15, paddingTop: 10}}>
-          <span>{lightMode ? "Teal" : "Light"} Mode</span>
-          <DarkMode checked={lightMode} onChange={() => setLightMode(!lightMode)} />
+        <div style={{position: "absolute", top: 0, right: '2rem', paddingTop: 20, paddingBottom: 10}}>
+          <Box display='flex'>
+            <Box>
+              {coloredMode && <LightModeIcon sx={{fontSize: '2rem', '&:hover': {cursor: 'pointer'}}} onClick={() => {
+                setColoredMode(false);
+                setLightMode(true)
+              }}/>}
+              {lightMode && <DarkModeIcon  sx={{fontSize: '1.5rem', '&:hover': {cursor: 'pointer'}}} onClick={() => {
+                setColoredMode(true);
+                setLightMode(false)
+              }}/>}
+              
+            </Box>
+          </Box>
         </div>
         <Header 
           category={category} 
